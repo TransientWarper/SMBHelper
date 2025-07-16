@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Review Reply Assistant</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    p {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .cta {
+      text-align: center;
+    }
+    .cta button {
+      background: #007BFF;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .cta button:hover {
+      background: #0056b3;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Save Hours Responding to Reviews</h1>
+    <p>Let AI handle your Google & Yelp replies in seconds.<br>Keep your brand voice consistent without the headache.</p>
+    <div class="cta">
+      <button onclick="window.location.href='mailto:stevenpboyer3@gmail.com?subject=Interested in AI Review Assistant'">Get Early Access</button>
+    </div>
+    <div class="footer">
+      <p>© 2025 YourName. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
