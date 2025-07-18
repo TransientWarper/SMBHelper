@@ -1,68 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Review Reply Assistant</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>B2B AI Signup</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
+    /* Modal styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
     }
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
       padding: 20px;
-      background: #fff;
       border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      font-family: Arial, sans-serif;
     }
-    h1 {
-      font-size: 1.8rem;
-      text-align: center;
+
+    .modal-header {
+      font-size: 20px;
       margin-bottom: 10px;
-    }
-    p {
       text-align: center;
-      font-size: 1.1rem;
-      color: #333;
-      margin-bottom: 20px;
+      font-weight: bold;
     }
-    .cta {
-      text-align: center;
+
+    input[type="text"], input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
     }
-    .cta button {
-      background: #007BFF;
-      color: #fff;
-      font-size: 1.2rem;
-      padding: 12px 20px;
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      width: 100%;
       border: none;
-      border-radius: 6px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
       cursor: pointer;
     }
-    .cta button:hover {
-      background: #0056b3;
-    }
-    .footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #777;
-      margin-top: 20px;
+
+    .close:hover {
+      color: black;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Save Hours Responding to Reviews</h1>
-    <p>Let AI handle your Google & Yelp replies in seconds.<br>Keep your brand voice consistent without the headache.</p>
-    <div class="cta">
-      <button onclick="window.location.href='mailto:stevenpboyer3@gmail.com?subject=Interested in AI Review Assistant'">Get Early Access</button>
-    </div>
-    <div class="footer">
-      <p>© 2025 YourName. All rights reserved.</p>
-    </div>
+
+<!-- Button to Open Modal -->
+<button id="openModalBtn">Join the Waitlist</button>
+
+<!-- Modal -->
+<div id="leadModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModalBtn">&times;</span>
+    <div class="modal-header">Join Our B2B AI Waitlist</div>
+    <form id="lead-form">
+      <input type="text" id="name" name="name" placeholder="Your Name" required>
+      <input type="email" id="email" name="email" placeholder="Your Email" required>
+      <input type="text" id="company" name="company" placeholder="Company Name">
+      <button type="submit">Submit</button>
+    </form>
   </div>
+</div>
+
+<script>
+  // Modal open/close logic
+  const modal = document.getElementById("leadModal");
+  const openModalBtn = document.getElementById("openModalBtn");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+
+  openModalBtn.onclick = () => modal.style.display = "block";
+  closeModalBtn.onclick = () => modal.style.display = "none";
+  window.onclick = (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Form submission with Zapier Webhook
+  document.getElementById("lead-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const formData = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      company: document.getElementById("company").value
+    };
+
+    try {
+      await fetch("https://hooks.zapier.com/hooks/catch/23545754/u2c02pm/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      alert("Thanks! You're on the waitlist.");
+      this.reset();
+      modal.style.display = "none";
+    } catch (error) {
+      console.error("Error sending data:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  });
+</script>
+
 </body>
 </html>
