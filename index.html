@@ -3,73 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2B AI Signup</title>
+  <title>B2B AI Waitlist</title>
   <style>
-    /* Modal styling */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Modal */
     .modal {
-      display: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: fixed;
-      z-index: 1000;
-      left: 0;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.4);
     }
 
     .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
+      background: #fff;
       padding: 20px;
       border-radius: 8px;
       width: 90%;
       max-width: 400px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      font-family: Arial, sans-serif;
     }
 
-    .modal-header {
-      font-size: 20px;
-      margin-bottom: 10px;
+    h2 {
       text-align: center;
-      font-weight: bold;
+      margin-bottom: 15px;
     }
 
-    input[type="text"], input[type="email"] {
+    input {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
+      font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 16px;
     }
 
     button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px;
       width: 100%;
+      padding: 10px;
+      font-size: 18px;
+      background: #4CAF50;
+      color: white;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      font-size: 16px;
     }
 
     button:hover {
-      background-color: #45a049;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      color: black;
+      background: #45a049;
     }
   </style>
 </head>
@@ -79,27 +74,24 @@
 <button id="openModalBtn">Join the Waitlist</button>
 
 <!-- Modal -->
-<div id="leadModal" class="modal">
+<div class="modal" id="leadModal" style="display:none;">
   <div class="modal-content">
-    <span class="close" id="closeModalBtn">&times;</span>
-    <div class="modal-header">Join Our B2B AI Waitlist</div>
+    <h2>Join Our B2B AI Waitlist</h2>
     <form id="lead-form">
-      <input type="text" id="name" name="name" placeholder="Your Name" required>
-      <input type="email" id="email" name="email" placeholder="Your Email" required>
-      <input type="text" id="company" name="company" placeholder="Company Name">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <input type="text" id="company" placeholder="Company Name">
       <button type="submit">Submit</button>
     </form>
   </div>
 </div>
 
 <script>
-  // Modal open/close logic
   const modal = document.getElementById("leadModal");
   const openModalBtn = document.getElementById("openModalBtn");
-  const closeModalBtn = document.getElementById("closeModalBtn");
 
-  openModalBtn.onclick = () => modal.style.display = "block";
-  closeModalBtn.onclick = () => modal.style.display = "none";
+  openModalBtn.onclick = () => modal.style.display = "flex";
+
   window.onclick = (event) => {
     if (event.target === modal) {
       modal.style.display = "none";
@@ -119,6 +111,7 @@
     try {
       await fetch("https://hooks.zapier.com/hooks/catch/23545754/u2c02pm/", {
         method: "POST",
+        mode: "no-cors", // ✅ Fix for CORS
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
